@@ -1,13 +1,56 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Poppins", "Roboto", sans-serif;
+  scroll-behavior: smooth;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: auto;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: lightgrey;
+  border-radius: 15px;
+  /* width: 4px; */
+  /* height: 2px; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #767777;
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #f2ae44;
+}
+
+input:focus {
+  outline: none;
+}
+
+input::file-selector-button {
+  border-radius: 32px;
+  font-family: "Poppins";
+  background: #606180;
+  border: none;
+  padding: 10px 20px;
+  font-style: italic;
+  color: white;
+  cursor: pointer;
 }
