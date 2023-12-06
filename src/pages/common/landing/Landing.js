@@ -1,7 +1,14 @@
 import React from "react";
+import SearchCars from "./components/SearchCars";
+import Contact from "./components/Contact";
 
 const Landing = () => {
-  return <div>Landing</div>;
+  return (
+    <>
+      <SearchCars />
+      <Contact />
+    </>
+  );
 };
 
 export default Landing;
