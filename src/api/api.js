@@ -19,9 +19,7 @@ API.interceptors.request.use((config) => {
   if (token) {
     config.headers["Authorization"] =
       "Bearer " + process.env.REACT_APP_TOKEN_STRAPI;
-    config.headers["Content-Type"] = "application/json";
-    config.headers["Access-Control-Allow-Origin"] =
-      process.env.REACT_APP_IMAGE_URL;
+    config.headers["ngrok-skip-browser-warning"] = true;
   }
 
   return config;
