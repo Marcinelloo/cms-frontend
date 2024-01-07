@@ -4,6 +4,7 @@ import Contact from "@/pages/common/contact/Contact";
 import AboutUs from "@/pages/common/about-us/AboutUs";
 import Register from "@/pages/common/register/Register";
 import Login from "@/pages/common/login/Login";
+import UserCars from "@/pages/user/cars/UserCars";
 
 export const ROUTES = [
   {
@@ -22,6 +23,16 @@ export const ROUTES = [
     component: (
       <ContentWrapper>
         <AboutUs />
+      </ContentWrapper>
+    ),
+    access: [],
+  },
+  {
+    name: "My Cars",
+    url: "/my-cars",
+    component: (
+      <ContentWrapper>
+        <UserCars />
       </ContentWrapper>
     ),
     access: [],

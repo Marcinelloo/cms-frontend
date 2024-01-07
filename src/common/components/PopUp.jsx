@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { COLORS } from "@/common/colors/colors";
 import Icon from "./Icon";
-import {COLORS} from "@/common/colors/colors";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,11 +16,10 @@ const Wrapper = styled.div`
   z-index: 10;
   margin-right: 20px;
   ${(props) =>
-      props.showBlur &&
-      css`
-        backdrop-filter: blur(5px);
-      `}
-
+    props.showBlur &&
+    css`
+      backdrop-filter: blur(5px);
+    `}
 `;
 
 const Box = styled.div`
@@ -30,7 +29,6 @@ const Box = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   //padding: 10px 10px 10px 10px;
-
 `;
 
 const Card = styled.div`
@@ -41,7 +39,6 @@ const Card = styled.div`
   flex-direction: column;
   max-height: 80vh;
   overflow-y: auto;
-
 `;
 
 const IconWrapper = styled.div`

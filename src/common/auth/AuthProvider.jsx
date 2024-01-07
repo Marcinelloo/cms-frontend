@@ -1,8 +1,7 @@
 import React from "react";
 
 const AuthProvider = ({ children, access, name }) => {
-  // tu bedzie jakas logika co sprawdza dostepy
-  document.title = "CRM - " + name;
+  document.title = "CAR LEND - " + name;
 
   return <>{children}</>;
 };
