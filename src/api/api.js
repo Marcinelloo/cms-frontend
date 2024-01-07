@@ -19,7 +19,6 @@ API.interceptors.request.use((config) => {
   if (token) {
     config.headers["Authorization"] =
       "Bearer " + process.env.REACT_APP_TOKEN_STRAPI;
-    config.headers["ngrok-skip-browser-warning"] = true;
   }
 
   return config;

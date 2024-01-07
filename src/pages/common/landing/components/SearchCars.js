@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  padding: 20px;
   background: url(${Background}) center no-repeat;
 `;
 
@@ -164,7 +165,7 @@ const SearchCars = () => {
                 <img
                   src={
                     process.env.REACT_APP_IMAGE_URL +
-                    attributes.Zdjecia.data.attributes.url
+                    attributes.image.data.attributes.url
                   }
                 />
               </ImageWrapper>
