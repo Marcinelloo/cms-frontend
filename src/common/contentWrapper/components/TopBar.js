@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Logo from "../images/logo.jpg";
 import { Link } from "react-router-dom";
+import store from "@/api/store";
+import { UserContext } from "@/common/context/userContext";
 
 const Wrapper = styled.div`
   display: flex;
@@ -72,6 +74,8 @@ const ButtonLogin = styled(Link)`
 `;
 
 const TopBar = () => {
+  const { user, setUser } = useContext(UserContext);
+
   return (
     <Wrapper>
       <ImageWrapper to="/">
@@ -82,9 +86,26 @@ const TopBar = () => {
         <CustomLink>marki</CustomLink>
         <CustomLink to="/contact">kontakt</CustomLink>
         <CustomLink to="/about-us">o nas</CustomLink>
+        {user && (
+          <>
+            <CustomLink to="/my-cars">moje Auta</CustomLink>
+            <CustomLink to="/profile">profil {user?.email}</CustomLink>
+          </>
+        )}
       </LinkWrapper>
       <div style={{ flex: "1" }}></div>
-      <ButtonLogin to="/login">zaloguj się</ButtonLogin>
+      {!user ? (
+        <ButtonLogin to="/login">zaloguj się</ButtonLogin>
+      ) : (
+        <ButtonLogin
+          onClick={() => {
+            store.logOut();
+            setUser(() => null);
+          }}
+        >
+          Wyloguj sie
+        </ButtonLogin>
+      )}
     </Wrapper>
   );
 };
