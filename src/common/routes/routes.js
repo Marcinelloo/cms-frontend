@@ -5,6 +5,8 @@ import AboutUs from "@/pages/common/about-us/AboutUs";
 import Register from "@/pages/common/register/Register";
 import Login from "@/pages/common/login/Login";
 import UserCars from "@/pages/user/cars/UserCars";
+import BlogMain from "@/pages/blog/BlogMain";
+import Reservations from "@/pages/user/reservations/Reservations";
 import Reviews from "@/pages/common/reviews/Reviews";
 import AddReview from "@/pages/common/reviews/AddReview";
 
@@ -40,6 +42,16 @@ export const ROUTES = [
     access: [],
   },
   {
+    name: "My reservations",
+    url: "/my-reservations",
+    component: (
+      <ContentWrapper>
+        <Reservations />
+      </ContentWrapper>
+    ),
+    access: [],
+  },
+  {
     name: "Reviews",
     url: "/reviews",
     component: (
@@ -65,6 +77,16 @@ export const ROUTES = [
     component: (
       <ContentWrapper>
         <Contact />
+      </ContentWrapper>
+    ),
+    access: [],
+  },
+  {
+    name: "Blog",
+    url: "/blog",
+    component: (
+      <ContentWrapper>
+        <BlogMain />
       </ContentWrapper>
     ),
     access: [],

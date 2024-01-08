@@ -79,16 +79,18 @@ const TopBar = () => {
   return (
     <Wrapper>
       <ImageWrapper to="/">
-        <img src={Logo} />
+        <img src={Logo} alt="Logo" />
       </ImageWrapper>
       <LinkWrapper>
         <CustomLink to="">oferta</CustomLink>
         <CustomLink>marki</CustomLink>
+        <CustomLink to="/blog">blog</CustomLink>
         <CustomLink to="/contact">kontakt</CustomLink>
         <CustomLink to="/about-us">o nas</CustomLink>
         <CustomLink to="/reviews">opinie</CustomLink>
         {user && (
           <>
+            <CustomLink to="/my-reservations">reservations </CustomLink>
             <CustomLink to="/my-cars">moje Auta</CustomLink>
             <CustomLink to="/profile">profil {user?.email}</CustomLink>
           </>

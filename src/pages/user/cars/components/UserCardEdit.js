@@ -21,9 +21,7 @@ const UserCardEdit = ({ car, setCar }) => {
   const handleCreateCarMutation = useMutation({
     mutationFn: (value) => createCar(value),
     onSuccess: () => {
-      setTimeout(() => {
-        setCar(null);
-      }, 5000);
+      setCar(null);
     },
   });
 
