@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MESSAGE_TYPES, MessageContext } from "@/common/context/messageContext";
+import Button from "@/common/components/buttons/Button";
 
 const PageContainer = styled.div`
   min-width: 400px;
@@ -45,7 +46,7 @@ const Input = styled.input`
   outline: none;
 `;
 
-const Button = styled.button`
+const ButtonForm = styled.button`
   background-color: #007bff;
   color: #fff;
   padding: 10px;
@@ -87,29 +88,51 @@ const AddReview = () => {
 
   return (
     <PageContainer>
-      <Heading>Dodaj opinię o naszym komisie</Heading>
-      <Form onSubmit={handleAddReview}>
-        <FormGroup>
-          <Label>Ocena</Label>
-          <Input
-            ref={ratingRef}
-            type="number"
-            min={1}
-            max={10}
-            step={1}
-            required
+      {user != null ? (
+        <div>
+          <Heading>Dodaj opinię o naszym komisie</Heading>
+          <Form onSubmit={handleAddReview}>
+            <FormGroup>
+              <Label>Ocena</Label>
+              <Input
+                ref={ratingRef}
+                type="number"
+                min={1}
+                max={10}
+                step={1}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Tytuł</Label>
+              <Input type="text" ref={titleRef} required />
+            </FormGroup>
+            <FormGroup>
+              <Label>Opis</Label>
+              <Input type="text" ref={descriptionRef} />
+            </FormGroup>
+            <ButtonForm type="submit">Dodaj</ButtonForm>
+            <Button
+              type="delete"
+              handler={() => navigate("/reviews")}
+              text={"Anuluj"}
+              style={{ width: "100%" }}
+            />
+          </Form>
+        </div>
+      ) : (
+        <div style={{ textAlign: "center" }}>
+          <Heading style={{ marginBottom: "20px" }}>
+            Zaloguj się, aby dodać opinię
+          </Heading>
+          <Button
+            type={"add"}
+            text={"Zaloguj się"}
+            handler={() => navigate("/login")}
+            style={{ marginBottom: "20px" }}
           />
-        </FormGroup>
-        <FormGroup>
-          <Label>Tytuł</Label>
-          <Input type="text" ref={titleRef} required />
-        </FormGroup>
-        <FormGroup>
-          <Label>Opis</Label>
-          <Input type="text" ref={descriptionRef} />
-        </FormGroup>
-        <Button type="submit">Dodaj</Button>
-      </Form>
+        </div>
+      )}
     </PageContainer>
   );
 };

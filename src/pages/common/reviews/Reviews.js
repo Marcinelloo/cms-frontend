@@ -69,8 +69,6 @@ const Reviews = () => {
   useEffect(() => {
     fetchAllReviews.mutate();
   }, []);
-  console.log(userReview);
-  console.log(user);
   return (
     <ListWrapper>
       <ListHeaderWrapper>Opinie o naszym komisie</ListHeaderWrapper>
