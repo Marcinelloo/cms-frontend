@@ -86,6 +86,7 @@ const TopBar = () => {
         <CustomLink>marki</CustomLink>
         <CustomLink to="/contact">kontakt</CustomLink>
         <CustomLink to="/about-us">o nas</CustomLink>
+        <CustomLink to="/reviews">opinie</CustomLink>
         {user && (
           <>
             <CustomLink to="/my-cars">moje Auta</CustomLink>

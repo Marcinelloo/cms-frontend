@@ -5,6 +5,8 @@ import AboutUs from "@/pages/common/about-us/AboutUs";
 import Register from "@/pages/common/register/Register";
 import Login from "@/pages/common/login/Login";
 import UserCars from "@/pages/user/cars/UserCars";
+import Reviews from "@/pages/common/reviews/Reviews";
+import AddReview from "@/pages/common/reviews/AddReview";
 
 export const ROUTES = [
   {
@@ -33,6 +35,26 @@ export const ROUTES = [
     component: (
       <ContentWrapper>
         <UserCars />
+      </ContentWrapper>
+    ),
+    access: [],
+  },
+  {
+    name: "Reviews",
+    url: "/reviews",
+    component: (
+      <ContentWrapper>
+        <Reviews />
+      </ContentWrapper>
+    ),
+    access: [],
+  },
+  {
+    name: "Add review",
+    url: "/reviews/add-review",
+    component: (
+      <ContentWrapper>
+        <AddReview />
       </ContentWrapper>
     ),
     access: [],
