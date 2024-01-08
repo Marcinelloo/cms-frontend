@@ -7,6 +7,10 @@ export const findAllCars = async () => {
   return await API.get(`${GROUP_DEFAULT_URL}?populate=image`);
 };
 
+export const getCar = async (id) => {
+  return await API.get(`${GROUP_DEFAULT_URL}/${id}?populate=image`);
+};
+
 export const findUserAllCars = async () => {
   const user = store.getUser();
 
