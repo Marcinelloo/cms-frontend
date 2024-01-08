@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Background from "../images/las.jpg";
@@ -8,6 +8,8 @@ import { findAllCars } from "@/api/repositories/car";
 import { useNavigate } from "react-router-dom";
 import Loading from "@/common/components/Loading";
 import LoadingContainer from "@/common/components/LoadingContainer";
+import { UserContext } from "@/common/context/userContext";
+import Reservation from "./Reservation";
 
 const Wrapper = styled.div`
   height: 450px;
@@ -122,7 +124,10 @@ const CarInfoWrapper = styled.div`
 
 const SearchCars = () => {
   const [data, setData] = useState([]);
+  const [reservation, setReservation] = useState();
+
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const searchCarsMutation = useMutation({
     mutationFn: () => findAllCars(),
@@ -170,11 +175,11 @@ const SearchCars = () => {
                 />
               </ImageWrapper>
               <CarInfoWrapper>
-                <div>Cena: {attributes.Price} zł</div>
+                <div>Cena: {attributes.price} zł</div>
                 <div>Kolor: {attributes.color}</div>
                 <div>Opis: {attributes.description}</div>
-                <div>Marka: {attributes.marka}</div>
-                <div>Model: {attributes.Price}</div>
+                <div>Marka: {attributes.brand}</div>
+                <div>Model: {attributes.model}</div>
               </CarInfoWrapper>
               <ButtonWrapper
                 style={{
@@ -186,6 +191,11 @@ const SearchCars = () => {
                 <ButtonSearch onClick={() => navigate(`/car-info/${id}`)}>
                   Zobacz oferte
                 </ButtonSearch>
+                {user && (
+                  <ButtonSearch onClick={() => setReservation(() => id)}>
+                    Zarezerwuj
+                  </ButtonSearch>
+                )}
               </ButtonWrapper>
             </CarElement>
           ))
@@ -195,6 +205,9 @@ const SearchCars = () => {
           "Niestety nie znalezlismy zadnych samochodow"
         )}
       </CarsWrapper>
+      {reservation && (
+        <Reservation data={reservation} setData={setReservation} />
+      )}
     </>
   );
 };
