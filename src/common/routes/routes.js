@@ -9,6 +9,7 @@ import BlogMain from "@/pages/blog/BlogMain";
 import Reservations from "@/pages/user/reservations/Reservations";
 import Reviews from "@/pages/common/reviews/Reviews";
 import AddReview from "@/pages/common/reviews/AddReview";
+import BlogArticle from "@/pages/blog/BlogArticle";
 
 export const ROUTES = [
   {
@@ -87,6 +88,16 @@ export const ROUTES = [
     component: (
       <ContentWrapper>
         <BlogMain />
+      </ContentWrapper>
+    ),
+    access: [],
+  },
+  {
+    name: "Blog",
+    url: "/blog/:articleLink",
+    component: (
+      <ContentWrapper>
+        <BlogArticle />
       </ContentWrapper>
     ),
     access: [],

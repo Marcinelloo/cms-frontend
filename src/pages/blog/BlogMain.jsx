@@ -1,6 +1,6 @@
 import { getArticles } from "@/api/repositories/article";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import ArticleTile from "./components/ArticleTile";
 import LoadingContainer from "@/common/components/LoadingContainer";
 import styled from "styled-components";
@@ -46,19 +46,18 @@ function BlogMain() {
     const [pageNumber, setPageNumber] = useState(1);
     const [articles, setArticle] = useState([]);
     const [showMore, setShowMore] = useState(false);
-    const { isLoading } = useQuery({
-        queryKey: ['articles', pageNumber],
-        queryFn: () => getArticles(pageNumber),
-        refetchOnMount: false,
-        refetchOnWindowFocus: false,
-        refetchOnReconnect: false,
-        staleTime: undefined,
+    const { isLoading, mutate } = useMutation({
+        mutationFn: () => getArticles(pageNumber),
         onSuccess: (result) => {
             console.log(result.data);
             setArticle(articles.concat(result.data.data));
             setShowMore(result.data.meta.pagination.pageCount === result.data.meta.pagination.pageSize);
         }
     });
+
+    useEffect(() => {
+        mutate();
+    }, [mutate, pageNumber]);
 
     if (isLoading && articles.length === 0) {
         return <LoadingContainer />;
