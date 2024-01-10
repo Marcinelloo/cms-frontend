@@ -59,7 +59,7 @@ const ButtonForm = styled.button`
 
 const AddReview = () => {
   const navigate = useNavigate();
-  const { handleMessage } = useContext(MessageContext);
+  const { handleAddMessage } = useContext(MessageContext);
   const user = store.getUser();
   const ratingRef = useRef();
   const titleRef = useRef();
@@ -68,11 +68,11 @@ const AddReview = () => {
   const handleAddReviewMutation = useMutation({
     mutationFn: (value) => createReview(value),
     onSuccess: () => {
-      handleMessage("Dodano opinię!", MESSAGE_TYPES.CORRECT);
+      handleAddMessage("Dodano opinię!", MESSAGE_TYPES.CORRECT);
       navigate("/reviews");
     },
     onError: () => {
-      handleMessage("Wystąpił błąd!", MESSAGE_TYPES.ERROR);
+      handleAddMessage("Wystąpił błąd!", MESSAGE_TYPES.ERROR);
     },
   });
 
