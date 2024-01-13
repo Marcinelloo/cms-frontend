@@ -7,11 +7,11 @@ export const findAllReviews = async (pageNumber) => {
   const user = store.getUser();
   if (user) {
     return await API.get(
-      `${GROUP_DEFAULT_URL}&filters[user][id][$ne]=${user.id}&sort=Title&pagination[page]=${pageNumber}&pagination[pageSize]=1`
+      `${GROUP_DEFAULT_URL}&filters[user][id][$ne]=${user.id}&sort=Title&pagination[page]=${pageNumber}&pagination[pageSize]=5`
     );
   } else {
     return await API.get(
-      `${GROUP_DEFAULT_URL}&sort=Title&pagination[page]=${pageNumber}&pagination[pageSize]=1`
+      `${GROUP_DEFAULT_URL}&sort=Title&pagination[page]=${pageNumber}&pagination[pageSize]=5`
     );
   }
 };
