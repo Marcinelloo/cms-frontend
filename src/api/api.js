@@ -15,12 +15,8 @@ const API = axios.create({
 });
 
 API.interceptors.request.use((config) => {
-  const token = store.getToken();
-  if (token) {
-    config.headers["Authorization"] =
-      "Bearer " + process.env.REACT_APP_TOKEN_STRAPI;
-  }
-
+  config.headers["Authorization"] =
+    "Bearer " + process.env.REACT_APP_TOKEN_STRAPI;
   return config;
 });
 
