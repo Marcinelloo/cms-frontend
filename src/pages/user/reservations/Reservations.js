@@ -6,16 +6,17 @@ import styled from "styled-components";
 import Loading from "@/common/components/Loading";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import Icon from "@/common/components/Icon";
 
 const ReservationsContainer = styled.div`
   text-align: center;
+  height: 100%;
 `;
 
 const CardsContainer = styled.div`
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
+  margin: 20px;
+  overflow-y: auto;
 `;
 
 const Card = styled.div`
@@ -25,7 +26,8 @@ const Card = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin: 10px;
-  width: 250px;
+  width: 280px;
+  height: 100px;
   text-align: left;
 `;
 
@@ -49,16 +51,11 @@ const Reservations = () => {
     <>
       {handleFindReservationsMutation.isLoading && <Loading />}
       <ReservationsContainer>
-        <h2>Your Reservations</h2>
-        {handleFindReservationsMutation.isError && (
-          <p>Error fetching reservations</p>
-        )}
-
+        <h2>Twoje rezerwacje</h2>
         {handleFindReservationsMutation.isSuccess && (
           <CardsContainer>
             {reservations.map((reservation) => {
               const car = reservation?.attributes?.car?.data || {};
-
               return (
                 <>
                   <Card key={reservation.id}>
@@ -67,15 +64,25 @@ const Reservations = () => {
                       {car?.attributes.year}, {car.price}
                     </Link>
                     <br />
-                    <strong>Reserved On:</strong>{" "}
+                    <br />
+                    <strong>Zarezerwowano na:</strong> <br />
                     {moment(reservation.attributes.reservation_date).format(
                       "DD/MM/YYYY HH:mm"
                     )}
                     <br />
-                    <strong>Confirmation Status:</strong>{" "}
-                    {reservation.attributes.confirmed
-                      ? "Zaakceptowano"
-                      : "Weryfikacja"}
+                    <strong>Status:</strong>{" "}
+                    <p
+                      style={{
+                        color:
+                          reservation.attributes.status === "accepted"
+                            ? "green"
+                            : reservation.attributes.status === "cancel"
+                            ? "red"
+                            : "orange",
+                      }}
+                    >
+                      {reservation.attributes.status}
+                    </p>
                   </Card>
                 </>
               );
