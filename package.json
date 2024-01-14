@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.1.0",
+    "@mooncake-dev/react-day-time-picker": "^1.0.5",
     "@tanstack/react-query": "^4.28.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",

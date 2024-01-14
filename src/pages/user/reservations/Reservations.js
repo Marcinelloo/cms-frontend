@@ -36,6 +36,7 @@ const Reservations = () => {
   const handleFindReservationsMutation = useMutation({
     mutationFn: (values) => findUserReservations(values),
     onSuccess: ({ data }) => {
+      console.log(data);
       setReservations(data.data);
     },
   });
