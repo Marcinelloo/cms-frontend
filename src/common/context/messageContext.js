@@ -45,7 +45,7 @@ const MessageElement = styled.div`
     to {
       opacity: 0;
     }
-  }
+}
 `;
 
 
