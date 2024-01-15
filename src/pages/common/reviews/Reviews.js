@@ -9,7 +9,7 @@ import LoadingContainer from "@/common/components/LoadingContainer";
 
 const ListWrapper = styled.div`
   text-align: center;
-  margin-bottom: 20px;
+  height: 100%;
 `;
 
 const ListHeaderWrapper = styled.h2`
@@ -18,7 +18,12 @@ const ListHeaderWrapper = styled.h2`
 `;
 
 const ReviewsWrapper = styled.div`
-  width: 50%;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
   margin: 0 auto;
 `;
 
@@ -29,6 +34,7 @@ const ReviewWrapper = styled.div`
   margin-bottom: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: left;
+  min-width: 300px;
 `;
 
 const UsernameWrapper = styled.div`
@@ -75,7 +81,7 @@ const ShowMoreButton = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-
+  margin-bottom: 40px;
   &:hover {
     transform: scale(1.1);
   }
@@ -128,9 +134,9 @@ const Reviews = () => {
           />
         )}
         {userReview && user && (
-          <div>
-            <h4 style={{ marginBottom: 3 }}>Twoja opinia</h4>
+          <>
             <ReviewsWrapper>
+              <h3 style={{ marginBottom: "20px" }}>Twoja opinia</h3>
               <ReviewWrapper>
                 <UsernameWrapper>
                   👤 {userReview.attributes.user.data.attributes.username}
@@ -143,28 +149,36 @@ const Reviews = () => {
                 </DescriptionWrapper>
               </ReviewWrapper>
             </ReviewsWrapper>
-          </div>
+          </>
         )}
-
         <ReviewsWrapper>
           {reviews.length > 0 ? (
             <div>
               {user && userReview && (
-                <h4 style={{ marginBottom: 3 }}>Opinie innych</h4>
+                <h3 style={{ marginBottom: "20px" }}>Opinie innych</h3>
               )}
-              {reviews.map(({ attributes, id }) => (
-                <ReviewWrapper key={id}>
-                  <UsernameWrapper>
-                    👤 {attributes.user.data.attributes.username}
-                  </UsernameWrapper>
-                  <RatingWrapper>{attributes.Rating}★</RatingWrapper>
-                  <RatingWrapper></RatingWrapper>
-                  <TitleWrapper>{attributes.Title}</TitleWrapper>
-                  <DescriptionWrapper>
-                    {attributes.Description}
-                  </DescriptionWrapper>
-                </ReviewWrapper>
-              ))}
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "20px",
+                  justifyContent: "center",
+                }}
+              >
+                {reviews.map(({ attributes, id }) => (
+                  <ReviewWrapper key={id}>
+                    <UsernameWrapper>
+                      👤 {attributes.user.data.attributes.username}
+                    </UsernameWrapper>
+                    <RatingWrapper>{attributes.Rating}★</RatingWrapper>
+                    <RatingWrapper></RatingWrapper>
+                    <TitleWrapper>{attributes.Title}</TitleWrapper>
+                    <DescriptionWrapper>
+                      {attributes.Description}
+                    </DescriptionWrapper>
+                  </ReviewWrapper>
+                ))}
+              </div>
               {showMore && !isLoading && (
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <ShowMoreButton onClick={() => setPageNumber(pageNumber + 1)}>
