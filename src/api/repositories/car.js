@@ -15,8 +15,15 @@ export const findUserAllCars = async () => {
   );
 };
 
-
-export const findCarsByParameter = async ({ brand, model, fuelType, year, mileage, minPrice, maxPrice }) => {
+export const findCarsByParameter = async ({
+  brand,
+  model,
+  fuelType,
+  year,
+  mileage,
+  minPrice,
+  maxPrice,
+}) => {
   let queryParams = `${GROUP_DEFAULT_URL}?populate=image`;
 
   const filters = [];
@@ -54,12 +61,11 @@ export const findCarsByParameter = async ({ brand, model, fuelType, year, mileag
   }
 
   if (filters.length > 0) {
-    queryParams += '&' + filters.join('&');
+    queryParams += "&" + filters.join("&");
   }
 
   return await API.get(queryParams);
 };
-
 
 export const updateCar = async (values) => {
   return await API.put(`${GROUP_DEFAULT_URL}/${values.id}`, { data: values });

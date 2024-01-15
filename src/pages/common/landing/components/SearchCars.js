@@ -85,18 +85,20 @@ const ClearFilter = styled.div`
   font-size: 1rem;
   line-height: 1.5rem;
   cursor: pointer;
+  font-weight: bold;
 `;
 
 const CarResultWrapper = styled.div`
   display: flex;
-  justify-content: left;
+  justify-content: center;
   margin: 40px;
+  gap: 10px;
+  font-weight: 400;
 
   transition: color 0.3s ease 0s;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   letter-spacing: 0px;
-  font-weight: 700;
   font-size: 1.2rem;
   line-height: 1.2rem;
 `;
@@ -324,7 +326,9 @@ const SearchCars = () => {
           <ButtonSearch onClick={handleSearch}>wyszukaj</ButtonSearch>
         </ButtonWrapper>
       </Wrapper>
-      <CarResultWrapper>znaleźliśmy {data.length} samochodów</CarResultWrapper>
+      <CarResultWrapper>
+        Liczba wyników: <b>{data.length}</b>
+      </CarResultWrapper>
       <CarsWrapper>
         {data.length > 0 ? (
           data.map(({ attributes, id }) => (
