@@ -18,7 +18,7 @@ const ListHeaderWrapper = styled.h2`
 `;
 
 const ReviewsWrapper = styled.div`
-  width: 80%;
+  width: 50%;
   margin: 0 auto;
 `;
 
