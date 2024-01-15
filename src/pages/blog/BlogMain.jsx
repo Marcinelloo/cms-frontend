@@ -1,10 +1,9 @@
 import { getArticles } from "@/api/repositories/article";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import ArticleTile from "./components/ArticleTile";
 import LoadingContainer from "@/common/components/LoadingContainer";
 import styled from "styled-components";
-import Button from "@/common/components/buttons/Button";
 
 const ArticlesWrapper = styled.div`
     display: flex;
