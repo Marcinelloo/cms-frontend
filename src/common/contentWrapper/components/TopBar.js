@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Logo from "../images/logo.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import store from "@/api/store";
 import { UserContext } from "@/common/context/userContext";
 
@@ -75,15 +75,13 @@ const ButtonLogin = styled(Link)`
 
 const TopBar = () => {
   const { user, setUser } = useContext(UserContext);
-
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <ImageWrapper to="/">
         <img src={Logo} alt="Logo" />
       </ImageWrapper>
       <LinkWrapper>
-        <CustomLink to="">oferta</CustomLink>
-        <CustomLink>marki</CustomLink>
         <CustomLink to="/blog">blog</CustomLink>
         <CustomLink to="/contact">kontakt</CustomLink>
         <CustomLink to="/about-us">o nas</CustomLink>
@@ -92,7 +90,6 @@ const TopBar = () => {
           <>
             <CustomLink to="/my-reservations">rezerwacje</CustomLink>
             <CustomLink to="/my-cars">moje Auta</CustomLink>
-            <CustomLink to="/profile">profil {user?.email}</CustomLink>
           </>
         )}
       </LinkWrapper>
@@ -104,6 +101,7 @@ const TopBar = () => {
           onClick={() => {
             store.logOut();
             setUser(() => null);
+            navigate("/");
           }}
         >
           Wyloguj sie

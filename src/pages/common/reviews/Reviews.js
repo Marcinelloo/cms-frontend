@@ -94,7 +94,6 @@ const Reviews = () => {
       mutationFn: () => findUserReview(),
       onSuccess: ({ data }) => {
         setUserReview(data.data[0]);
-        console.log(userReview);
       },
     });
 
@@ -150,7 +149,9 @@ const Reviews = () => {
         <ReviewsWrapper>
           {reviews.length > 0 ? (
             <div>
-              <h4 style={{ marginBottom: 3 }}>Opinie innych</h4>
+              {user && userReview && (
+                <h4 style={{ marginBottom: 3 }}>Opinie innych</h4>
+              )}
               {reviews.map(({ attributes, id }) => (
                 <ReviewWrapper key={id}>
                   <UsernameWrapper>
