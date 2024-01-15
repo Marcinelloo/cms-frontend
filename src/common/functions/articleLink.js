@@ -5,7 +5,7 @@
  */
 export function createLinkForArticle(title, id) {
     const titleSplitted = title.split(' ');
-    return `${titleSplitted.slice(0, 5).join('-')}-${id}`;
+    return encodeURI(`${titleSplitted.slice(0, 5).join('-')}-${id}`);
 }
 
 /**
@@ -13,6 +13,6 @@ export function createLinkForArticle(title, id) {
  * @param {string} url 
  */
 export function getIdFromUrl(url) {
-    const urlSplitted = url.split('-');
+    const urlSplitted = decodeURI(url).split('-');
     return Number.parseInt(urlSplitted[urlSplitted.length - 1]);
 }

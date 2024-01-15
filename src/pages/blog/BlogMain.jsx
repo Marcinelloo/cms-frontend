@@ -48,7 +48,6 @@ function BlogMain() {
     const { isLoading, mutate } = useMutation({
         mutationFn: () => getArticles(pageNumber),
         onSuccess: (result) => {
-            console.log(result.data);
             setArticle(articles.concat(result.data.data));
             setShowMore(result.data.meta.pagination.pageCount === result.data.meta.pagination.pageSize);
         }

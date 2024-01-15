@@ -6,15 +6,20 @@ import { createLinkForArticle } from "@/common/functions/articleLink";
 const baseUrl = process.env.REACT_APP_IMAGE_URL;
 
 const ArticleTileContainer = styled.div`
-    width: 40%;
+    width: 600px;
     -webkit-box-shadow: 0px 0px 15px -7px rgba(66, 68, 90, 1);
     -moz-box-shadow: 0px 0px 15px -7px rgba(66, 68, 90, 1);
     box-shadow: 0px 0px 15px -7px rgba(66, 68, 90, 1);
     border-radius: 15px;
+    margin-bottom: 30px;
+    margin-right: 15px;
+    margin-left: 15px;
 `;
 
 const ArticleTileImage = styled.img`
     overflow: hidden;
+    border-radius: 15px;
+    object-fit: cover;
 `;
 
 const ArticleTileTitle = styled.div`
@@ -40,6 +45,7 @@ function ArticleTile({ article }) {
                 <ArticleTileImage 
                     alt={article.attributes.Main_Image.data.attributes.alternativeText} 
                     src={`${baseUrl}${article.attributes.Main_Image.data.attributes.url}`}
+                    width="100%"
                     height="300px"
                     />
             </div>
