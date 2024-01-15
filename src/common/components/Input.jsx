@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
   input {
     color: ${(props) => props.inputColor || "black"};
-    background: transparent;
+    background: white;
     border: none;
     padding: 0.6rem;
     width: ${(props) => props.width || "92%"};
@@ -26,12 +26,12 @@ const Wrapper = styled.div`
     font-size: ${(props) => props.fontSize || "16px"};
     white-space: ${(props) => (props.wrapText ? "normal" : "nowrap")};
     border-bottom: ${(props) =>
-      props.type === "file" ? "none" : " 1px solid black"};
+    props.type === "file" ? "none" : " 1px solid black"};
 
     &:focus,
     &:hover {
       border-bottom: ${(props) =>
-        props.type === "file" ? "none" : ` 1px solid ${COLORS.second}`};
+    props.type === "file" ? "none" : ` 1px solid ${COLORS.second}`};
     }
   }
 
@@ -91,7 +91,7 @@ const Input = ({
   labelStyle = {},
   disabled = false,
   multiple,
-  handleOnKeydownButton = () => {},
+  handleOnKeydownButton = () => { },
   onKeyDown,
   min,
   max,

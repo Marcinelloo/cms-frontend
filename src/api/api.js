@@ -15,8 +15,16 @@ const API = axios.create({
 });
 
 API.interceptors.request.use((config) => {
+<<<<<<< Updated upstream
   config.headers["Authorization"] =
     "Bearer " + process.env.REACT_APP_TOKEN_STRAPI;
+=======
+  const token = store.getToken();
+  config.headers["Authorization"] =
+    "Bearer " + process.env.REACT_APP_TOKEN_STRAPI;
+
+
+>>>>>>> Stashed changes
   return config;
 });
 
