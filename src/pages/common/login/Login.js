@@ -9,6 +9,8 @@ import { MESSAGE_TYPES, MessageContext } from "@/common/context/messageContext";
 
 const PageContainer = styled.div`
   min-width: 300px;
+  max-width: 400px;
+
   margin: 0 auto;
   padding: 20px;
   border-radius: 5px;

@@ -87,7 +87,7 @@ const CONFIG = [
 const Contact = () => {
   return (
     <Wrapper>
-      <Title>nie znalazles jakiegos samochodu? Masz jakies pytania?</Title>
+      <Title>Nie znalazles jakiegos samochodu? Masz jakies pytania?</Title>
       <CardWrapper>
         {CONFIG.map((c) => (
           <Card>
