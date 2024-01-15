@@ -16,6 +16,8 @@ import Input from "@/common/components/Input";
 import { yearData } from "@/pages/user/cars/data/years";
 import { mileageRangeData } from "@/pages/user/cars/data/mileage";
 import { fuelTypeData } from "@/pages/user/cars/data/fuelType";
+import { findUserAllCars } from "@/api/repositories/myCar";
+import { AddToMyCars, RemoveFromMyCars } from "@/pages/user/cars/components/Actions";
 
 const Wrapper = styled.div`
   height: 450px;
@@ -130,6 +132,7 @@ const CarInfoWrapper = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 5px;
 `;
 
@@ -180,6 +183,18 @@ const SearchCars = () => {
   //     setData(dataArray);
   //   }
   // });
+  const [myCars, setMyCars] = useState([])
+  const getMyCarsMutation = useMutation({
+    mutationFn: () => findUserAllCars(),
+    onSuccess: ({ data }) => {
+      console.log({ data })
+      setMyCars(data.data)
+    }
+  });
+
+  useEffect(() => {
+    getMyCarsMutation.mutate()
+  }, [])
 
   const searchCarsMutation = useMutation({
     mutationFn: () => findAllCars(),
@@ -338,6 +353,10 @@ const SearchCars = () => {
                 />
               </ImageWrapper>
               <CarInfoWrapper>
+                {myCars.find((val) => val.attributes.car.data.id === id) ?
+                  <RemoveFromMyCars id={myCars.find((val) => val.attributes.car.data.id === id).id} onRemoved={() => getMyCarsMutation.mutate()} /> :
+                  <AddToMyCars carId={id} onAdded={() => getMyCarsMutation.mutate()} />
+                }
                 <div>Cena: {attributes.price} zł</div>
                 <div>Kolor: {attributes.color}</div>
                 <div>Opis: {attributes.description}</div>
