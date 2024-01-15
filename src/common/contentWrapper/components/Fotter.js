@@ -13,14 +13,19 @@ const Flex = styled.div`
   gap: 20px;
 `;
 
+const Link = styled.a`
+  text-decoration: none;
+  color: black;
+`;
+
 const Fotter = () => {
   return (
     <>
       <Wrapper>
         <div>©{new Date().getFullYear()} cos cos SP z.o.o. s.p.k</div>{" "}
         <Flex>
-          <div>Regulamin</div>
-          <div>Polityka Prywatsności</div>
+          <Link href="/Regulamin.pdf">Regulamin</Link>
+          <Link href="/Polityka_prywatności.pdf">Polityka Prywatsności</Link>
         </Flex>
       </Wrapper>
     </>

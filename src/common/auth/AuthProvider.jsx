@@ -1,7 +1,7 @@
 import React from "react";
 
 const AuthProvider = ({ children, access, name }) => {
-  document.title = "CAR LEND - " + name;
+  document.title = "Car rental - " + name;
 
   return <>{children}</>;
 };
