@@ -8,6 +8,7 @@ import styled from "styled-components";
 const ArticlesWrapper = styled.div`
     display: flex;
     pagination: 30px;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     margin-bottom: 20px;
 `
