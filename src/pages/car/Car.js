@@ -13,24 +13,55 @@ const PageContainer = styled.div`
   border-radius: 5px;
   background: #fff;
   min-height: 75vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
 const ImageWrapper = styled.div`
-  width: 300px;
-  height: 150px;
+  width: 100%;
+  max-height: 300px;
   overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
   }
+`;
+
+const OpisHeader = styled.div`
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+const OpisText = styled.div`
+  margin-bottom: 20px;
 `;
 
 const CarInfoWrapper = styled.div`
   padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+`;
+
+const ListSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
+  width: 50%; /* Each column takes 50% of the width */
+`;
+
+const ListItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 `;
 
 const CustomLink = styled(Link)``;
@@ -62,11 +93,59 @@ const Car = () => {
           }
         />
       </ImageWrapper>
+      <OpisHeader>Opis</OpisHeader>
+      <OpisText>{car.attributes?.description}</OpisText>
+
       <CarInfoWrapper>
-        <div>Cena: {car.attributes?.Price} zł</div>
-        <div>Kolor: {car.attributes?.color}</div>
-        <div>Opis: {car.attributes?.description}</div>
-        <div>Marka: {car.attributes?.marka}</div>
+        <ListSection>
+          <ListItem>
+            <strong>Cena:</strong> {car.attributes?.price} zł
+          </ListItem>
+          <ListItem>
+            <strong>Kolor:</strong> {car.attributes?.color}
+          </ListItem>
+          <ListItem>
+            <strong>Marka:</strong> {car.attributes?.brand}
+          </ListItem>
+          <ListItem>
+            <strong>Model:</strong> {car.attributes?.model}
+          </ListItem>
+          <ListItem>
+            <strong>Rok produkcji:</strong> {car.attributes?.year}
+          </ListItem>
+          <ListItem>
+            <strong>Pojemność silnika:</strong>{" "}
+            {car.attributes?.engine_size + "l"}
+          </ListItem>
+          <ListItem>
+            <strong>Rodzaj paliwa:</strong> {car.attributes?.fuel_type}
+          </ListItem>
+          <ListItem>
+            <strong>Skrzynia biegów:</strong>{" "}
+            {car.attributes?.automatic_stick_shift
+              ? "Automatyczna"
+              : "Manualna"}
+          </ListItem>
+        </ListSection>
+        <ListSection>
+          <ListItem>
+            <strong>Liczba miejsc:</strong> {car.attributes?.seats}
+          </ListItem>
+          <ListItem>
+            <strong>Liczba drzwi:</strong> {car.attributes?.door_num}
+          </ListItem>
+          <ListItem>
+            <strong>Przebieg:</strong> {car.attributes?.przebieg + "km"}
+          </ListItem>
+          <ListItem>
+            <strong>Pierwszy właściciel:</strong>{" "}
+            {car.attributes?.first_owner ? "Tak" : "Nie"}
+          </ListItem>
+          <ListItem>
+            <strong>Bezwypadkowy:</strong>{" "}
+            {car.attributes?.bezwypadkowy ? "Tak" : "Nie"}
+          </ListItem>
+        </ListSection>
       </CarInfoWrapper>
     </PageContainer>
   );
