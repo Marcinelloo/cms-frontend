@@ -4,17 +4,24 @@ import TopBar from "./components/TopBar";
 import Fotter from "./components/Fotter";
 
 const Wrapper = styled.div`
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  height: 100vh;
 `;
 
 const ContentWrapper = ({ children }) => {
   return (
     <Wrapper>
       <TopBar />
-      {children}
-      <div style={{ flex: "1", background: "#f6f6f6" }}></div>
+      <div
+        style={{
+          height: "calc(100vh - 60px)",
+          overflowY: "auto",
+        }}
+      >
+        {children}
+      </div>
       <Fotter />
     </Wrapper>
   );
