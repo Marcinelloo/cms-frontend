@@ -31,6 +31,7 @@ function BlogArticle() {
         mutationFn: getArticleById,
         onSuccess: (data) => {
             setData(data.data.data);
+            document.title = data.data.data.attributes.Title;
         }
     });
 

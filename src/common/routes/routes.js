@@ -13,7 +13,7 @@ import BlogArticle from "@/pages/blog/BlogArticle";
 
 export const ROUTES = [
   {
-    name: "Landing",
+    name: "witamy!",
     url: "/",
     component: (
       <ContentWrapper>
@@ -23,7 +23,7 @@ export const ROUTES = [
     access: [],
   },
   {
-    name: "About Us",
+    name: "o nas",
     url: "/about-us",
     component: (
       <ContentWrapper>
@@ -33,7 +33,7 @@ export const ROUTES = [
     access: [],
   },
   {
-    name: "My Cars",
+    name: "moje Auta",
     url: "/my-cars",
     component: (
       <ContentWrapper>
@@ -43,7 +43,7 @@ export const ROUTES = [
     access: [],
   },
   {
-    name: "My reservations",
+    name: "rezerwacje",
     url: "/my-reservations",
     component: (
       <ContentWrapper>
@@ -53,7 +53,7 @@ export const ROUTES = [
     access: [],
   },
   {
-    name: "Reviews",
+    name: "opinie",
     url: "/reviews",
     component: (
       <ContentWrapper>
@@ -63,7 +63,7 @@ export const ROUTES = [
     access: [],
   },
   {
-    name: "Add review",
+    name: "dodaj opinie",
     url: "/reviews/add-review",
     component: (
       <ContentWrapper>
@@ -73,7 +73,7 @@ export const ROUTES = [
     access: [],
   },
   {
-    name: "Contact",
+    name: "kontakt",
     url: "/contact",
     component: (
       <ContentWrapper>
@@ -83,7 +83,7 @@ export const ROUTES = [
     access: [],
   },
   {
-    name: "Blog",
+    name: "blog",
     url: "/blog",
     component: (
       <ContentWrapper>
@@ -93,7 +93,7 @@ export const ROUTES = [
     access: [],
   },
   {
-    name: "Blog",
+    name: "blog",
     url: "/blog/:articleLink",
     component: (
       <ContentWrapper>
@@ -103,7 +103,7 @@ export const ROUTES = [
     access: [],
   },
   {
-    name: "Login",
+    name: "logowanie",
     url: "/login",
     component: (
       <ContentWrapper>
@@ -113,7 +113,7 @@ export const ROUTES = [
     access: [],
   },
   {
-    name: "Register",
+    name: "rejestracja",
     url: "/register",
     component: (
       <ContentWrapper>
