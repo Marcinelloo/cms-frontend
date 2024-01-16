@@ -17,117 +17,116 @@ import { yearData } from "@/pages/user/cars/data/years";
 import { mileageRangeData } from "@/pages/user/cars/data/mileage";
 import { fuelTypeData } from "@/pages/user/cars/data/fuelType";
 
-
 const Wrapper = styled.div`
-    height: 450px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
-    background: url(${Background}) center no-repeat;
-  `;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: url(${Background}) center no-repeat;
+`;
 
 const ButtonSearch = styled.button`
-    width: auto;
-    position: relative;
-    display: inline-block;
-    flex: 0 0 auto;
-    overflow: hidden;
-    outline: none;
-    text-align: center;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: all 0.3s ease 0s;
-    user-select: none;
-    cursor: pointer;
-    min-width: 120px;
-    height: 44px;
-    padding: 0px 16px;
-    color: rgb(255, 255, 255);
-    font-weight: 600;
-    font-size: 1rem;
-    text-transform: none;
-    background-color: rgb(174, 0, 0);
-    border: none;
-    border-radius: 15px;
-  `;
+  width: auto;
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  overflow: hidden;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.3s ease 0s;
+  user-select: none;
+  cursor: pointer;
+  min-width: 120px;
+  height: 44px;
+  padding: 0px 16px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: none;
+  background-color: rgb(174, 0, 0);
+  border: none;
+  border-radius: 15px;
+`;
 
 const ButtonWrapper = styled.div`
-    display: flex;
-    min-width: 800px;
-    align-items: center;
-    gap: 20px;
-    justify-content: right;
-  `;
+  display: flex;
+  min-width: 800px;
+  align-items: center;
+  gap: 20px;
+  justify-content: right;
+`;
 
 const SelectWrapper = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    max-width: 600px;
-  `;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 600px;
+`;
 
 const ClearFilter = styled.div`
-    margin: 0px;
-    transition: color 0.3s ease 0s;
-    -webkit-font-smoothing: antialiased;
-    -webkit-tap-highlight-color: transparent;
-    color: rgb(255, 255, 255);
-    font-family: Montserrat, "DejaVu Sans", Verdana, sans‑serif;
-    letter-spacing: 0px;
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    cursor: pointer;
-  `;
+  margin: 0px;
+  transition: color 0.3s ease 0s;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  color: rgb(255, 255, 255);
+  font-family: Montserrat, "DejaVu Sans", Verdana, sans‑serif;
+  letter-spacing: 0px;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  cursor: pointer;
+`;
 
 const CarResultWrapper = styled.div`
-    display: flex;
-    justify-content: left;
-    margin: 40px;
+  display: flex;
+  justify-content: left;
+  margin: 40px;
 
-    transition: color 0.3s ease 0s;
-    -webkit-font-smoothing: antialiased;
-    -webkit-tap-highlight-color: transparent;
-    letter-spacing: 0px;
-    font-weight: 700;
-    font-size: 1.2rem;
-    line-height: 1.2rem;
-  `;
+  transition: color 0.3s ease 0s;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  letter-spacing: 0px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+`;
 
 const CarsWrapper = styled.div`
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 40px;
-    background-color: #f6f6f6;
-  `;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 40px;
+  background-color: #f6f6f6;
+`;
 
 const CarElement = styled.div`
-    width: 300px;
-    border: 1px dashed lightgray;
-  `;
+  width: 300px;
+  border: 1px dashed lightgray;
+`;
 
 const ImageWrapper = styled.div`
-    width: 300px;
-    height: 150px;
-    overflow: hidden;
+  width: 300px;
+  height: 150px;
+  overflow: hidden;
 
-    img {
-      width: 100%;
-      height: auto;
-    }
-  `;
+  img {
+    width: 100%;
+    height: auto;
+  }
+`;
 
 const CarInfoWrapper = styled.div`
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  `;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
 
 const PriceRangeWrapper = styled.div`
   display: flex;
@@ -135,8 +134,7 @@ const PriceRangeWrapper = styled.div`
   justify-content: space-between;
   width: 260px;
   color: white;
-  `;
-
+`;
 
 const SearchCars = () => {
   const minPriceRef = useRef();
@@ -186,26 +184,53 @@ const SearchCars = () => {
     },
   });
 
-
   const searchCarsMutationByParameter = useMutation({
-    mutationFn: (brand, model, fuel_type, year, mileage, minPrice, maxPrice) => findCarsByParameter(brand, model, fuel_type, year, mileage, minPrice, maxPrice),
+    mutationFn: (brand, model, fuel_type, year, mileage, minPrice, maxPrice) =>
+      findCarsByParameter(
+        brand,
+        model,
+        fuel_type,
+        year,
+        mileage,
+        minPrice,
+        maxPrice
+      ),
     onSuccess: ({ data }) => {
       setData(data.data);
     },
   });
-
 
   const handleSearch = () => {
     const brand = selectedBrand ? selectedBrand.value : null;
     const model = selectedModel ? selectedModel.value : null;
     const fuelType = selectedFuelType ? selectedFuelType.value : null;
     const year = selectedYear ? selectedYear.value : null;
-    const mileage = selectedMileage ? parseInt(selectedMileage.value, 10) : null;
-    const minPrice = minPriceRef?.current?.value && parseInt(minPriceRef.current.value);
-    const maxPrice = maxPriceRef?.current?.value && parseInt(maxPriceRef.current.value);
+    const mileage = selectedMileage
+      ? parseInt(selectedMileage.value, 10)
+      : null;
+    const minPrice =
+      minPriceRef?.current?.value && parseInt(minPriceRef.current.value);
+    const maxPrice =
+      maxPriceRef?.current?.value && parseInt(maxPriceRef.current.value);
 
-    if (selectedBrand || selectedBrand && selectedModel || selectedFuelType || selectedYear || mileage || minPrice || maxPrice) {
-      searchCarsMutationByParameter.mutate({ brand, model, fuelType, year, mileage, minPrice, maxPrice });
+    if (
+      selectedBrand ||
+      (selectedBrand && selectedModel) ||
+      selectedFuelType ||
+      selectedYear ||
+      mileage ||
+      minPrice ||
+      maxPrice
+    ) {
+      searchCarsMutationByParameter.mutate({
+        brand,
+        model,
+        fuelType,
+        year,
+        mileage,
+        minPrice,
+        maxPrice,
+      });
     }
   };
 
@@ -213,14 +238,13 @@ const SearchCars = () => {
     setSelectedBrand(brand);
     setSelectedModel(null);
     setModelOptions(() => {
-      return brand.models
-    })
-  }
+      return brand.models;
+    });
+  };
 
   useEffect(() => {
     searchCarsMutation.mutate();
   }, []);
-
 
   const handleDelete = () => {
     setSelectedBrand(null);
@@ -232,7 +256,6 @@ const SearchCars = () => {
     minPriceRef.current.value = null;
     maxPriceRef.current.value = null;
   };
-
 
   return (
     <>
@@ -259,7 +282,8 @@ const SearchCars = () => {
           />
           <PriceRangeWrapper>
             <div>
-              <Input type="number"
+              <Input
+                type="number"
                 labelStyle={{ display: "none" }}
                 placeholder="cena min"
                 width="100px"
@@ -267,14 +291,17 @@ const SearchCars = () => {
               />
             </div>
             <div>
-              <Input type="number"
+              <Input
+                type="number"
                 labelStyle={{ display: "none" }}
                 placeholder="cena max"
                 width="100px"
-                inputRef={maxPriceRef} />
+                inputRef={maxPriceRef}
+              />
             </div>
           </PriceRangeWrapper>
-          <SelectInput placeholder="przebieg"
+          <SelectInput
+            placeholder="przebieg"
             options={mileageRangeData}
             selected={selectedMileage}
             setSelected={setSelectedMileage}
