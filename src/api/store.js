@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 class Store {
   parseJwt(token) {
     var base64Url = token.split(".")[1];
@@ -24,6 +26,7 @@ class Store {
     localStorage.removeItem("token");
     localStorage.removeItem("refresh");
     localStorage.removeItem("user");
+    window.location = "/";
   }
 
   setUser(user) {

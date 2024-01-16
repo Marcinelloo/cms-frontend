@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Logo from "../images/logo.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import store from "@/api/store";
 import { UserContext } from "@/common/context/userContext";
 
@@ -9,12 +9,13 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 20px 40px;
-
   gap: 40px;
 `;
 
 const ImageWrapper = styled(Link)`
-  width: 80px;
+  min-width: 60px;
+  max-width: 60px;
+
   overflow: hidden;
 
   img {
@@ -26,6 +27,19 @@ const ImageWrapper = styled(Link)`
 const LinkWrapper = styled.div`
   display: flex;
   gap: 10px;
+
+  @media (max-width: 600px) {
+    display: ${(props) => (props.showMenu ? "flex" : "none")};
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    background-color: #fff;
+    padding: 10px;
+    z-index: 99999999999;
+    width: 100%;
+  }
 `;
 
 const CustomLink = styled(Link)`
@@ -37,10 +51,6 @@ const CustomLink = styled(Link)`
   text-decoration: none;
   color: rgb(174, 0, 0);
   cursor: pointer;
-
-  &:hover {
-    transform: scale(1.1);
-  }
 `;
 
 const ButtonLogin = styled(Link)`
@@ -73,17 +83,26 @@ const ButtonLogin = styled(Link)`
   }
 `;
 
+const HamburgerButton = styled.div`
+  display: none;
+  cursor: pointer;
+
+  @media (max-width: 600px) {
+    display: block;
+  }
+`;
+
 const TopBar = () => {
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <Wrapper>
       <ImageWrapper to="/">
         <img src={Logo} alt="Logo" />
       </ImageWrapper>
-      <LinkWrapper>
-        <CustomLink to="">oferta</CustomLink>
-        <CustomLink>marki</CustomLink>
+      <LinkWrapper showMenu={showMenu}>
         <CustomLink to="/blog">blog</CustomLink>
         <CustomLink to="/contact">kontakt</CustomLink>
         <CustomLink to="/about-us">o nas</CustomLink>
@@ -92,7 +111,6 @@ const TopBar = () => {
           <>
             <CustomLink to="/my-reservations">rezerwacje</CustomLink>
             <CustomLink to="/my-cars">moje Auta</CustomLink>
-            <CustomLink to="/profile">profil {user?.email}</CustomLink>
           </>
         )}
       </LinkWrapper>
@@ -104,11 +122,15 @@ const TopBar = () => {
           onClick={() => {
             store.logOut();
             setUser(() => null);
+            navigate("/");
           }}
         >
           Wyloguj sie
         </ButtonLogin>
       )}
+      <HamburgerButton onClick={() => setShowMenu(!showMenu)}>
+        ☰
+      </HamburgerButton>
     </Wrapper>
   );
 };

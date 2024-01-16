@@ -5,9 +5,12 @@ import styled from "styled-components";
 import store from "@/api/store";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "@/common/context/userContext";
+import { MESSAGE_TYPES, MessageContext } from "@/common/context/messageContext";
 
 const PageContainer = styled.div`
-  min-width: 400px;
+  min-width: 300px;
+  max-width: 400px;
+
   margin: 0 auto;
   padding: 20px;
   border-radius: 5px;
@@ -68,13 +71,18 @@ const Login = () => {
   const passwordRef = useRef();
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
+  const { handleAddMessage } = useContext(MessageContext);
 
   const handleLoginMutation = useMutation({
     mutationFn: (value) => loginUser(value),
     onSuccess: ({ data }) => {
       store.setTokens(data);
       setUser(() => data.user);
+      handleAddMessage("Zalogowano!", MESSAGE_TYPES.CORRECT);
       navigate("/");
+    },
+    onError: () => {
+      handleAddMessage("Coś poszło nie tak!", MESSAGE_TYPES.ERROR);
     },
   });
 
@@ -90,7 +98,7 @@ const Login = () => {
 
   return (
     <PageContainer>
-      <Heading>Login</Heading>
+      <Heading>Zaloguj się</Heading>
       <Form onSubmit={handleLogin}>
         <FormGroup>
           <Label>Email</Label>

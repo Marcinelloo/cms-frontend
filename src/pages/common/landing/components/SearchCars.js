@@ -16,6 +16,8 @@ import Input from "@/common/components/Input";
 import { yearData } from "@/pages/user/cars/data/years";
 import { mileageRangeData } from "@/pages/user/cars/data/mileage";
 import { fuelTypeData } from "@/pages/user/cars/data/fuelType";
+import { findUserAllCars } from "@/api/repositories/myCar";
+import { AddToMyCars, RemoveFromMyCars } from "@/pages/user/cars/components/Actions";
 
 const Wrapper = styled.div`
   height: 450px;
@@ -59,6 +61,11 @@ const ButtonWrapper = styled.div`
   align-items: center;
   gap: 20px;
   justify-content: right;
+
+  @media (max-width: 600px) {
+    max-width: 600px;
+    min-width: 300px;
+  }
 `;
 
 const SelectWrapper = styled.div`
@@ -80,18 +87,21 @@ const ClearFilter = styled.div`
   font-size: 1rem;
   line-height: 1.5rem;
   cursor: pointer;
+  font-weight: bold;
 `;
 
 const CarResultWrapper = styled.div`
   display: flex;
-  justify-content: left;
+  justify-content: center;
   margin: 40px;
+  gap: 10px;
+  font-weight: 400;
+
 
   transition: color 0.3s ease 0s;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   letter-spacing: 0px;
-  font-weight: 700;
   font-size: 1.2rem;
   line-height: 1.2rem;
 `;
@@ -125,6 +135,7 @@ const CarInfoWrapper = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 5px;
 `;
 
@@ -175,12 +186,23 @@ const SearchCars = () => {
   //     setData(dataArray);
   //   }
   // });
+  const [myCars, setMyCars] = useState([])
+  const getMyCarsMutation = useMutation({
+    mutationFn: () => findUserAllCars(),
+    onSuccess: ({ data }) => {
+      console.log({ data })
+      setMyCars(data.data)
+    }
+  });
+
+  useEffect(() => {
+    getMyCarsMutation.mutate()
+  }, [])
 
   const searchCarsMutation = useMutation({
     mutationFn: () => findAllCars(),
     onSuccess: ({ data }) => {
       setData(data.data);
-      console.log(data);
     },
   });
 
@@ -320,7 +342,9 @@ const SearchCars = () => {
           <ButtonSearch onClick={handleSearch}>wyszukaj</ButtonSearch>
         </ButtonWrapper>
       </Wrapper>
-      <CarResultWrapper>znaleźliśmy {data.length} samochodów</CarResultWrapper>
+      <CarResultWrapper>
+        Liczba wyników: <b>{data.length}</b>
+      </CarResultWrapper>
       <CarsWrapper>
         {data.length > 0 ? (
           data.map(({ attributes, id }) => (
@@ -334,6 +358,10 @@ const SearchCars = () => {
                 />
               </ImageWrapper>
               <CarInfoWrapper>
+                {myCars.find((val) => val.attributes.car.data.id === id) ?
+                  <RemoveFromMyCars id={myCars.find((val) => val.attributes.car.data.id === id).id} onRemoved={() => getMyCarsMutation.mutate()} /> :
+                  <AddToMyCars carId={id} onAdded={() => getMyCarsMutation.mutate()} />
+                }
                 <div>Cena: {attributes.price} zł</div>
                 <div>Kolor: {attributes.color}</div>
                 <div>Opis: {attributes.description}</div>

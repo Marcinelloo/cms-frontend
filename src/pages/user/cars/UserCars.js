@@ -1,11 +1,14 @@
-import { findUserAllCars } from "@/api/repositories/car";
+import { findUserAllCarsPopulated } from "@/api/repositories/myCar";
 import LoadingContainer from "@/common/components/LoadingContainer";
 import PopUp from "@/common/components/PopUp";
 import { useMutation } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { UserContext } from "@/common/context/userContext";
 import { useNavigate } from "react-router-dom";
+import Reservation from "../../common/landing/components/Reservation";
 import styled from "styled-components";
 import UserCardEdit from "./components/UserCardEdit";
+import { AddToMyCars, RemoveFromMyCars } from "./components/Actions";
 
 const ButtonSearch = styled.button`
   width: auto;
@@ -53,7 +56,7 @@ const ClearFilter = styled.div`
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   color: rgb(255, 255, 255);
-  font-family: Montserrat, "DejaVu Sans", Verdana, sans‑serif;
+  font-family: Montserrat, "DejaVu Sans", Verdana, sans-serif;
   letter-spacing: 0px;
   font-weight: 500;
   font-size: 1rem;
@@ -104,6 +107,7 @@ const CarInfoWrapper = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 5px;
 `;
 
@@ -112,19 +116,24 @@ const UserCars = () => {
   const [car, setCar] = useState();
 
   const navigate = useNavigate();
+  const [reservation, setReservation] = useState();
+
 
   const fetchUserCarsMutation = useMutation({
-    mutationFn: () => findUserAllCars(),
+    mutationFn: () => findUserAllCarsPopulated(),
     onSuccess: ({ data }) => {
-      setUserCars(data.data);
+      setUserCars([...data.data]);
+      console.log({ data })
     },
   });
 
+  const { user } = useContext(UserContext);
+
   useEffect(() => {
-    if (!car) {
+    if (!fetchUserCarsMutation.isError) {
       fetchUserCarsMutation.mutate();
     }
-  }, [car]);
+  }, []);
 
   return (
     <>
@@ -133,22 +142,24 @@ const UserCars = () => {
       </CarResultWrapper>
       <CarsWrapper>
         {userCars.length > 0 ? (
-          userCars.map(({ attributes, id }) => (
+          userCars.map(({ attributes: { car }, id }) => (
             <CarElement>
               <ImageWrapper>
                 <img
                   src={
                     process.env.REACT_APP_IMAGE_URL +
-                    attributes.image.data.attributes.url
+                    car.data.attributes.image.data.attributes.url
                   }
+                  alt={car.data.attributes.image.data.attributes.alternativeText}
                 />
               </ImageWrapper>
               <CarInfoWrapper>
-                <div>Cena: {attributes.price} zł</div>
-                <div>Kolor: {attributes.color}</div>
-                <div>Opis: {attributes.description}</div>
-                <div>Marka: {attributes.brand}</div>
-                <div>Model: {attributes.model}</div>
+                <RemoveFromMyCars id={id} onRemoved={fetchUserCarsMutation.mutate} />
+                <div>Cena: {car.data.attributes.price} zł</div>
+                <div>Kolor: {car.data.attributes.color}</div>
+                <div>Opis: {car.data.attributes.description}</div>
+                <div>Marka: {car.data.attributes.brand}</div>
+                <div>Model: {car.data.attributes.model}</div>
               </CarInfoWrapper>
               <ButtonWrapper
                 style={{
@@ -157,19 +168,27 @@ const UserCars = () => {
                   justifyContent: "center",
                 }}
               >
-                <ButtonSearch onClick={() => setCar({ id: id, ...attributes })}>
-                  Edytuj oferte
+                <ButtonSearch onClick={() => navigate(`/car-info/${car.data.id}`)}>
+                  Zobacz oferte
                 </ButtonSearch>
+                {user && (
+                  <ButtonSearch onClick={() => setReservation(() => car.data.id)}>
+                    Zarezerwuj
+                  </ButtonSearch>
+                )}
               </ButtonWrapper>
             </CarElement>
           ))
         ) : fetchUserCarsMutation.isLoading ? (
           <LoadingContainer />
         ) : (
-          "Niestety nie znaleziono żadnych samochodów użytkownika"
+          ""
         )}
       </CarsWrapper>
       {car && <UserCardEdit car={car} setCar={setCar} />}
+      {reservation && (
+        <Reservation data={reservation} setData={setReservation} />
+      )}
     </>
   );
 };
