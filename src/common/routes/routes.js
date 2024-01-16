@@ -10,6 +10,7 @@ import Reservations from "@/pages/user/reservations/Reservations";
 import Reviews from "@/pages/common/reviews/Reviews";
 import AddReview from "@/pages/common/reviews/AddReview";
 import BlogArticle from "@/pages/blog/BlogArticle";
+import Car from "@/pages/car/Car";
 
 export const ROUTES = [
   {
@@ -118,6 +119,16 @@ export const ROUTES = [
     component: (
       <ContentWrapper>
         <Register />
+      </ContentWrapper>
+    ),
+    access: [],
+  },
+  {
+    name: "Car info",
+    url: "/car-info/:id",
+    component: (
+      <ContentWrapper>
+        <Car />
       </ContentWrapper>
     ),
     access: [],

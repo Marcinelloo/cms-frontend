@@ -97,6 +97,7 @@ const CarResultWrapper = styled.div`
   gap: 10px;
   font-weight: 400;
 
+
   transition: color 0.3s ease 0s;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;

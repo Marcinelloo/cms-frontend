@@ -5,15 +5,21 @@ export const findAllCars = async () => {
   return await API.get(`${GROUP_DEFAULT_URL}?populate=image`);
 };
 
-export const findCarsByParameter = async ({
-  brand,
-  model,
-  fuelType,
-  year,
-  mileage,
-  minPrice,
-  maxPrice,
-}) => {
+export const getCar = async (id) => {
+  return await API.get(`${GROUP_DEFAULT_URL}/${id}?populate=image`);
+};
+
+export const findUserAllCars = async () => {
+  const user = store.getUser();
+
+  return await API.get(
+    `${GROUP_DEFAULT_URL}?filters[user][id][$eq]=${user.id}&populate=image`
+  );
+};
+
+
+export const findCarsByParameter = async ({ brand, model, fuelType, year, mileage, minPrice, maxPrice }) => {
+
   let queryParams = `${GROUP_DEFAULT_URL}?populate=image`;
 
   const filters = [];
