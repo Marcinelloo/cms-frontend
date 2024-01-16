@@ -95,7 +95,7 @@ const Reviews = () => {
   const [showMore, setShowMore] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { isLoading: isUserReviewLoading, mutate: userReviewMutate } =
+  const { mutate: userReviewMutate } =
     useMutation({
       mutationFn: () => findUserReview(),
       onSuccess: ({ data }) => {
@@ -111,7 +111,6 @@ const Reviews = () => {
     },
   });
   useEffect(() => {
-    console.log(pageNumber);
     mutate();
   }, [mutate, pageNumber]);
 

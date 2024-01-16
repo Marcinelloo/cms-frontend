@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import Loading from "@/common/components/Loading";
 import Reservation from "@/pages/common/landing/components/Reservation";
 import Contact from "@/pages/common/landing/components/Contact";
+import { getByCarId } from "@/api/repositories/myCar";
+import { AddToMyCars, RemoveFromMyCars } from "../user/cars/components/Actions";
 
 const PageContainer = styled.div`
   min-width: 400px;
@@ -21,6 +23,7 @@ const PageContainer = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
+  position: relative;
   gap: 20px;
 `;
 
@@ -115,23 +118,32 @@ const ButtonSearch = styled.button`
   border-radius: 15px;
 `;
 
-const CustomLink = styled(Link)``;
 
 const Car = () => {
   const [car, setCar] = useState({});
   const [reservation, setReservation] = useState();
+  const [isMyCar, setIsMyCar] = useState(false);
   const { id } = useParams();
   const { user } = useContext(UserContext);
+
+  const isMyCarMutation = useMutation({
+    mutationFn: () => getByCarId(id),
+    onSuccess: ({ data }) => {
+      setIsMyCar(data.data.length > 0);
+    }
+  })
 
   const fetchCarMutation = useMutation({
     mutationFn: (value) => getCar(value),
     onSuccess: ({ data }) => {
       setCar(data.data);
+      document.title = `Car rental - ${data.data.attributes?.brand} ${data.data.attributes?.model} ${data.data.attributes?.year}`
     },
   });
 
   useEffect(() => {
     fetchCarMutation.mutate(id);
+    isMyCarMutation.mutate();
   }, []);
 
   return (
@@ -140,6 +152,10 @@ const Car = () => {
       <PageContainer>
         <PaddingWrapper>
           <Wrapper>
+            {user && <>
+              {isMyCar ? <RemoveFromMyCars fontSize={'2em'} id={id} onRemoved={() => setIsMyCar(false)} /> : <AddToMyCars fontSize={'2em'} carId={id} onAdded={() => setIsMyCar(true)} />}
+            </>
+            }
             <Image>
               <img
                 src={

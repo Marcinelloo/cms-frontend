@@ -124,7 +124,7 @@ export const ROUTES = [
     access: [],
   },
   {
-    name: "Car info",
+    name: "samochód",
     url: "/car-info/:id",
     component: (
       <ContentWrapper>

@@ -358,9 +358,13 @@ const SearchCars = () => {
                 />
               </ImageWrapper>
               <CarInfoWrapper>
-                {myCars.find((val) => val.attributes.car.data.id === id) ?
-                  <RemoveFromMyCars id={myCars.find((val) => val.attributes.car.data.id === id).id} onRemoved={() => getMyCarsMutation.mutate()} /> :
-                  <AddToMyCars carId={id} onAdded={() => getMyCarsMutation.mutate()} />
+                {user &&
+                  <>
+                    {myCars.find((val) => val.attributes.car.data.id === id) ?
+                      <RemoveFromMyCars id={myCars.find((val) => val.attributes.car.data.id === id).id} onRemoved={() => getMyCarsMutation.mutate()} /> :
+                      <AddToMyCars carId={id} onAdded={() => getMyCarsMutation.mutate()} />
+                    }
+                  </>
                 }
                 <div>Cena: {attributes.price} zł</div>
                 <div>Kolor: {attributes.color}</div>

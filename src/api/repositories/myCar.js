@@ -16,6 +16,15 @@ export const findUserAllCarsPopulated = async () => {
     );
 };
 
+/**
+ * 
+ * @param {number} carId 
+ */
+export const getByCarId = (carId) => {
+    const user = store.getUser();
+    return API.get(`my-cars?filters[car][id][$eq]=${carId}&filters[user][id][$eq]=${user.id}`);
+}
+
 export const findUserAllCars = () => {
     const user = store.getUser();
     return API.get(`my-cars?populate=car&filters[user][id][$eq]=${user.id}`);

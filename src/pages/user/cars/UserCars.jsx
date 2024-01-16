@@ -1,14 +1,13 @@
 import { findUserAllCarsPopulated } from "@/api/repositories/myCar";
 import LoadingContainer from "@/common/components/LoadingContainer";
-import PopUp from "@/common/components/PopUp";
 import { useMutation } from "@tanstack/react-query";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/common/context/userContext";
 import { useNavigate } from "react-router-dom";
 import Reservation from "../../common/landing/components/Reservation";
 import styled from "styled-components";
 import UserCardEdit from "./components/UserCardEdit";
-import { AddToMyCars, RemoveFromMyCars } from "./components/Actions";
+import { RemoveFromMyCars } from "./components/Actions";
 
 const ButtonSearch = styled.button`
   width: auto;
@@ -41,27 +40,6 @@ const ButtonWrapper = styled.div`
   align-items: center;
   gap: 20px;
   justify-content: right;
-`;
-
-const SelectWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  max-width: 600px;
-`;
-
-const ClearFilter = styled.div`
-  margin: 0px;
-  transition: color 0.3s ease 0s;
-  -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: transparent;
-  color: rgb(255, 255, 255);
-  font-family: Montserrat, "DejaVu Sans", Verdana, sans-serif;
-  letter-spacing: 0px;
-  font-weight: 500;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  cursor: pointer;
 `;
 
 const CarResultWrapper = styled.div`
@@ -138,7 +116,7 @@ const UserCars = () => {
   return (
     <>
       <CarResultWrapper>
-        Znaleziono {userCars.length} samochodów użytkownika
+        Liczba twoich Aut: {userCars.length}
       </CarResultWrapper>
       <CarsWrapper>
         {userCars.length > 0 ? (
