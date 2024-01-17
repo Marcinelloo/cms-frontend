@@ -147,11 +147,38 @@ const PriceRangeWrapper = styled.div`
   color: white;
 `;
 
+
+const PageButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  gap: 10px;
+  background-color: #f6f6f6;
+`;
+
+const PageButton = styled.button`
+  padding: 10px 15px;
+  font-size: 1rem;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #2980b9;
+  }
+`;
+
+
 const SearchCars = () => {
   const minPriceRef = useRef();
   const maxPriceRef = useRef();
   const [data, setData] = useState([]);
   const [reservation, setReservation] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const resultsPerPage = 4;
 
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedModel, setSelectedModel] = useState(null);
@@ -169,24 +196,8 @@ const SearchCars = () => {
 
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-
-  // const searchCarsMutation = useMutation({
-  //   mutationFn: () => findAllCars(),
-  //   onSuccess: ({ data }) => {
-  //     console.log("CARS", data);
-  //     const dataArray = data.data;
-  //     const uniqueBrands = Array.from(new Set(dataArray.map(car => car.attributes.brand)));
-  //     const uniqueYears = Array.from(new Set(dataArray.map(car => car.attributes.year)));
-  //     const uniqueFuelTypes = Array.from(new Set(dataArray.map(car => car.attributes.fuel_type)));
-
-  //     setBrandOptions(uniqueBrands.map(brand => ({ label: brand, value: brand })));
-  //     setYearOptions(uniqueYears.map(year => ({ label: year, value: year })));
-  //     setFuelOptions(uniqueFuelTypes.map(fuelT => ({ label: fuelT, value: fuelT })));
-
-  //     setData(dataArray);
-  //   }
-  // });
   const [myCars, setMyCars] = useState([])
+
   const getMyCarsMutation = useMutation({
     mutationFn: () => findUserAllCars(),
     onSuccess: ({ data }) => {
@@ -219,6 +230,7 @@ const SearchCars = () => {
       ),
     onSuccess: ({ data }) => {
       setData(data.data);
+      setCurrentPage(1);
     },
   });
 
@@ -255,6 +267,17 @@ const SearchCars = () => {
       });
     }
   };
+
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+
+  const startIndex = (currentPage - 1) * resultsPerPage;
+  const endIndex = startIndex + resultsPerPage;
+  const displayedCars = data.slice(startIndex, endIndex);
+
 
   const handleBrandsChange = (brand) => {
     setSelectedBrand(brand);
@@ -346,9 +369,9 @@ const SearchCars = () => {
         Liczba wyników: <b>{data.length}</b>
       </CarResultWrapper>
       <CarsWrapper>
-        {data.length > 0 ? (
-          data.map(({ attributes, id }) => (
-            <CarElement>
+        {displayedCars.length > 0 ? (
+          displayedCars.map(({ attributes, id }) => (
+            <CarElement key={id}>
               <ImageWrapper>
                 <img
                   src={
@@ -358,14 +381,21 @@ const SearchCars = () => {
                 />
               </ImageWrapper>
               <CarInfoWrapper>
-                {user &&
+                {user && (
                   <>
-                    {myCars.find((val) => val.attributes.car.data.id === id) ?
-                      <RemoveFromMyCars id={myCars.find((val) => val.attributes.car.data.id === id).id} onRemoved={() => getMyCarsMutation.mutate()} /> :
-                      <AddToMyCars carId={id} onAdded={() => getMyCarsMutation.mutate()} />
-                    }
+                    {myCars.find((val) => val.attributes.car.data.id === id) ? (
+                      <RemoveFromMyCars
+                        id={myCars.find((val) => val.attributes.car.data.id === id).id}
+                        onRemoved={() => getMyCarsMutation.mutate()}
+                      />
+                    ) : (
+                      <AddToMyCars
+                        carId={id}
+                        onAdded={() => getMyCarsMutation.mutate()}
+                      />
+                    )}
                   </>
-                }
+                )}
                 <div>Cena: {attributes.price} zł</div>
                 <div>Kolor: {attributes.color}</div>
                 <div>Opis: {attributes.description}</div>
@@ -396,6 +426,13 @@ const SearchCars = () => {
           "Niestety nie znalezlismy zadnych samochodow"
         )}
       </CarsWrapper>
+      <PageButtonsWrapper>
+        {Array.from({ length: Math.ceil(data.length / resultsPerPage) }, (_, index) => (
+          <PageButton key={index + 1} onClick={() => handlePageChange(index + 1)}>
+            {index + 1}
+          </PageButton>
+        ))}
+      </PageButtonsWrapper>
       {reservation && (
         <Reservation data={reservation} setData={setReservation} />
       )}
