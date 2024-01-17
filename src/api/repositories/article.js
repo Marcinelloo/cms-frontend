@@ -3,17 +3,21 @@ import API from "../api";
 const GROUP_DEFAULT_URL = "articles";
 
 /**
- * 
- * @param {number} pageNumber 
+ *
+ * @param {number} pageNumber
  */
 export function getArticles(pageNumber) {
-    return API.get(`${GROUP_DEFAULT_URL}?sort=publishedAt:desc&pagination[page]=${pageNumber}&populate=Main_Image`);
+  return API.get(
+    `${GROUP_DEFAULT_URL}?sort=publishedAt:desc&pagination[page]=${pageNumber}&populate=Main_Image`
+  );
 }
 
 /**
- * 
- * @param {number} id 
+ *
+ * @param {number} id
  */
 export function getArticleById(id) {
-    return API.get(`${GROUP_DEFAULT_URL}/${id}?populate=Main_Image`);
+  return API.get(
+    `${GROUP_DEFAULT_URL}/${id}?populate=Main_Image&populate=comments&populate[1]=comments.user`
+  );
 }

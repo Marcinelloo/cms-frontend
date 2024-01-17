@@ -5,11 +5,11 @@ import AboutUs from "@/pages/common/about-us/AboutUs";
 import Register from "@/pages/common/register/Register";
 import Login from "@/pages/common/login/Login";
 import UserCars from "@/pages/user/cars/UserCars";
-import BlogMain from "@/pages/blog/BlogMain";
+import BlogMain from "@/pages/common/blog/BlogMain";
 import Reservations from "@/pages/user/reservations/Reservations";
 import Reviews from "@/pages/common/reviews/Reviews";
 import AddReview from "@/pages/common/reviews/AddReview";
-import BlogArticle from "@/pages/blog/BlogArticle";
+import BlogArticle from "@/pages/common/blog/BlogArticle";
 import Car from "@/pages/car/Car";
 
 export const ROUTES = [

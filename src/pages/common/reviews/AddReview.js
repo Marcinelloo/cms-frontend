@@ -8,7 +8,7 @@ import { MESSAGE_TYPES, MessageContext } from "@/common/context/messageContext";
 import Button from "@/common/components/buttons/Button";
 
 const PageContainer = styled.div`
-  min-width: 400px;
+  min-width: 300px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 5px;
