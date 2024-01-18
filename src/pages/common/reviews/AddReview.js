@@ -9,6 +9,7 @@ import Button from "@/common/components/buttons/Button";
 
 const PageContainer = styled.div`
   min-width: 300px;
+  max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 5px;
