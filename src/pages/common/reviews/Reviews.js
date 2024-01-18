@@ -35,6 +35,7 @@ const ReviewWrapper = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: left;
   min-width: 300px;
+  max-width: 300px;
 `;
 
 const UsernameWrapper = styled.div`
@@ -95,13 +96,12 @@ const Reviews = () => {
   const [showMore, setShowMore] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { mutate: userReviewMutate } =
-    useMutation({
-      mutationFn: () => findUserReview(),
-      onSuccess: ({ data }) => {
-        setUserReview(data.data[0]);
-      },
-    });
+  const { mutate: userReviewMutate } = useMutation({
+    mutationFn: () => findUserReview(),
+    onSuccess: ({ data }) => {
+      setUserReview(data.data[0]);
+    },
+  });
 
   const { isLoading, mutate } = useMutation({
     mutationFn: () => findAllReviews(pageNumber),
