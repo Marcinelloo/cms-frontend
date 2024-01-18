@@ -59,7 +59,7 @@ const Reservations = () => {
               return (
                 <>
                   <Card key={reservation.id}>
-                    <Link to={`/car/${car.id}`}>
+                    <Link to={`/car-info/${car.id}`}>
                       Car : {car?.attributes.brand}, {car?.attributes.model},{" "}
                       {car?.attributes.year}, {car.price}
                     </Link>
